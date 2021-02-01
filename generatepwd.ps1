@@ -1,4 +1,8 @@
-﻿$user= 'marge.simpson'#$args[0]
+<#USAGE: example with name John Smith ()
+.\generatedpwd.ps1 smith
+#>
+
+﻿$user= $args[0]
 $menim=Get-ADUser -Filter * -Properties Name,SamAccountName | Where {$_.SamAccountName -eq "$user"} | Select -ExpandProperty  Name #,SamAccountName 
 
 $adcheck=Get-ADUser -Filter * -Properties Name,SamAccountName | Where {$_.Name -like "*$user*"} | Select  Name,SamAccountName | Format-Table
