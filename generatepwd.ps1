@@ -1,4 +1,4 @@
-<#USAGE: example with name John Smith ()
+<#USAGE: example with name John Smith () S
 .\generatedpwd.ps1 smith
 #>
 
