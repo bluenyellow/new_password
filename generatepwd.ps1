@@ -59,7 +59,7 @@ $zrezanedruhe=$druhe.substring(0, [System.Math]::Min(4, $druhe.Length))
 
  Read-Host -Prompt "For password set, press any key or CTRL+C to quit"       #toto je confirm ci chceme heslo setnut danemu uzivatelovi
 
-Set-ADAccountPassword $user -Reset -NewPassword (ConvertTo-SecureString -AsPlainText “$hsl” -Force) #tuto sa setne vygenerovane heslo           
+Set-ADAccountPassword $user -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "$hsl" -Force) #tuto sa setne vygenerovane heslo           
 
 Write-Host -BackgroundColor Red "heslo" $hsl
 Write-Host -ForegroundColor Black -BackgroundColor Yellow "telefon" $tel
