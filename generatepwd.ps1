@@ -64,6 +64,7 @@ Set-ADAccountPassword $user -Reset -NewPassword (ConvertTo-SecureString -AsPlain
 Write-Host -BackgroundColor Red "heslo" $hsl
 Write-Host -ForegroundColor Black -BackgroundColor Yellow "telefon" $tel
 
+<#
 $text = "Heslo do VPN a PC je: $hsl"
 $recipient = "$tel"
 
@@ -76,7 +77,9 @@ $params = @{
    }
    Invoke-RestMethod -SkipCertificateCheck -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
 
-<#
+
+
+   <#
 #odtialto je to uz len napajanie na modem a odosielanie SMSky
 
 $serialPort = new-Object System.IO.Ports.SerialPort
