@@ -2,7 +2,10 @@
 .\generatedpwd.ps1 smith
 #>
 
-$S = New-PSSession -ComputerName DC-1
+$password = ConvertTo-SecureString "Kamosko744" -AsPlainText -Force
+$cred= New-Object System.Management.Automation.PSCredential ("adamica", $password )
+
+$S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
 
 $user= "simpson" #$args[0]   #tu ide meno v tvare samaccountname
@@ -54,8 +57,7 @@ $zrezanedruhe=$druhe.substring(0, [System.Math]::Min(4, $druhe.Length))
 
 
 [string]$hsl=$zrezaneprve+$zrezanedruhe+$cislo     #tu je heslo kopmletne vygenerovane v tvare XxxxXxxxNN
- 
-
+Write-Host -BackgroundColor Red "heslo" $hsl
 
  Read-Host -Prompt "For password set, press any key or CTRL+C to quit"       #toto je confirm ci chceme heslo setnut danemu uzivatelovi
 
