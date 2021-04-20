@@ -8,7 +8,7 @@ $cred= New-Object System.Management.Automation.PSCredential ("adamica", $passwor
 $S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
 
-$user= "simpson" #$args[0]   #tu ide meno v tvare samaccountname
+$user= "marge.simpson" #$args[0]   #tu ide meno v tvare samaccountname
 
 if($user -eq $null){Write-host "treba zadat meno(SamAccountName)";exit}     #overi ci argument mena nie je empty     
 
@@ -66,16 +66,17 @@ Set-ADAccountPassword $user -Reset -NewPassword (ConvertTo-SecureString -AsPlain
 Write-Host -BackgroundColor Red "heslo" $hsl
 Write-Host -ForegroundColor Black -BackgroundColor Yellow "telefon" $tel
 
-<#
+
 $text = "Heslo do VPN a PC je: $hsl"
 $recipient = "$tel"
 
 #odosielanie SMS
 
 $params = @{
-    "sender"="+421900900900";
-    "recipient"="+421900900900";
-    "text"="obsah spravy";
+    "token"="vQpHRB3FFshqD3AH";
+    #"sender"="+421900900900";
+    "recipient"="$tel";
+    "text"="$text";
    }
    Invoke-RestMethod -SkipCertificateCheck -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
 
@@ -126,7 +127,7 @@ $serialPort.Close()
 if ($serialPort.IsOpen -eq $false) {
  Write-Output "Port Closed!"
 }
-
-
-
 #>
+
+
+
