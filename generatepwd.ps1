@@ -78,7 +78,8 @@ $params = @{
     "recipient"="$tel";
     "text"="$text";
    }
-   Invoke-RestMethod -SkipCertificateCheck -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
+   [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+   Invoke-RestMethod -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
 
 
 
