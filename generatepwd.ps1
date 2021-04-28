@@ -8,7 +8,7 @@ $cred= New-Object System.Management.Automation.PSCredential ("adamica", $passwor
 $S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
 
-$user= "marge.simpson" #$args[0]   #tu ide meno v tvare samaccountname
+$user= "lancos" #$args[0]   #tu ide meno v tvare samaccountname
 
 if($user -eq $null){Write-host "treba zadat meno(SamAccountName)";exit}     #overi ci argument mena nie je empty     
 
@@ -68,7 +68,7 @@ Write-Host -ForegroundColor Black -BackgroundColor Yellow "telefon" $tel
 
 
 $text = "Heslo do VPN a PC je: $hsl"
-$recipient = "$tel"
+$tel = "$tel"
 
 #odosielanie SMS
 
@@ -78,8 +78,8 @@ $params = @{
     "recipient"="$tel";
     "text"="$text";
    }
-   [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
-   Invoke-RestMethod -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
+  # [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+   Invoke-RestMethod -SkipCertificateCheck -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
 
 
 
