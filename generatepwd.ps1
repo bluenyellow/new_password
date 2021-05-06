@@ -8,7 +8,7 @@ $cred= New-Object System.Management.Automation.PSCredential ("adamica", $passwor
 $S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
 
-$user= "lancos" #$args[0]   #tu ide meno v tvare samaccountname
+$user= "marge.simpson" #$args[0]   #tu ide meno v tvare samaccountname
 
 if($user -eq $null){Write-host "treba zadat meno(SamAccountName)";exit}     #overi ci argument mena nie je empty     
 
