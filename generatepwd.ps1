@@ -2,8 +2,11 @@
 .\generatedpwd.ps1 smith
 #>
 
-$password = ConvertTo-SecureString "pwd" -AsPlainText -Force
-$cred= New-Object System.Management.Automation.PSCredential ("username", $password )
+$admin=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty user
+$pw=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty password
+
+$password = ConvertTo-SecureString "$pw" -AsPlainText -Force
+$cred= New-Object System.Management.Automation.PSCredential ("$admin", $password )
 
 $S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
@@ -27,7 +30,7 @@ if($usernum -gt 1){Write-Host "Pod zadanym hladanim sa nachadzaju dve osoby" ; $
 Write-Host -ForegroundColor Green "Generujem heslo" 
 $menim
 
-$plist=Get-Content C:\Users\adamica\Desktop\generatingpwd\words.txt   #nacitanie wordlistu
+$plist=Get-Content ~\Desktop\generatingpwd\words.txt   #nacitanie wordlistu
 
 $much=$plist.Count   #spocitanie poctu slov
 
