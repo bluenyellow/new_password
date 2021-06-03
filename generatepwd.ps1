@@ -2,8 +2,8 @@
 .\generatedpwd.ps1 smith
 #>
 
-$password = ConvertTo-SecureString "Kamosko744" -AsPlainText -Force
-$cred= New-Object System.Management.Automation.PSCredential ("adamica", $password )
+$password = ConvertTo-SecureString "pwd" -AsPlainText -Force
+$cred= New-Object System.Management.Automation.PSCredential ("username", $password )
 
 $S = New-PSSession -ComputerName DC-1 -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
