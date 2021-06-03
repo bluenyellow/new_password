@@ -4,6 +4,7 @@
 
 $admin=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty user
 $pw=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty password
+$uri=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty uri
 
 $password = ConvertTo-SecureString "$pw" -AsPlainText -Force
 $cred= New-Object System.Management.Automation.PSCredential ("$admin", $password )
@@ -82,7 +83,7 @@ $params = @{
     "text"="$text";
    }
    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
-   Invoke-RestMethod -ContentType 'application/json' -Method 'Post' -Uri https://sms-gw.joj.sk/send-sms -Body ($params|ConvertTo-Json)
+   Invoke-RestMethod -ContentType 'application/json' -Method 'Post' -Uri $uri -Body ($params|ConvertTo-Json)
 
 
 
