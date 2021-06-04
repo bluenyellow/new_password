@@ -5,11 +5,12 @@
 $admin=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty user
 $pw=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty password
 $uri=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty uri
+$pc=Import-Csv ~\Desktop\heslo_pre_newpassword.csv | Select-Object -ExpandProperty pc
 
 $password = ConvertTo-SecureString "$pw" -AsPlainText -Force
 $cred= New-Object System.Management.Automation.PSCredential ("$admin", $password )
 
-$S = New-PSSession -ComputerName DC-1 -Credential $cred
+$S = New-PSSession -ComputerName $pc -Credential $cred
 Import-Module -PSsession $S -Name ActiveDirectory
 
 $user= "marge.simpson" #$args[0]   #tu ide meno v tvare samaccountname
